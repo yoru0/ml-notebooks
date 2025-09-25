@@ -1,10 +1,19 @@
-# Recsys
+﻿# Recommender System
 
-A simple **recommender system** prototype — notebooks and code exploring recommendation algorithms.
+Notebook-based implementation of a user-user collaborative filtering recommender using the MovieLens 100K dataset.
 
-## What’s inside
+## Overview
+- Downloads MovieLens metadata and ratings directly from GroupLens.
+- Builds a user-item utility matrix and computes cosine similarity between users.
+- Generates top-N movie recommendations by predicting ratings from similar users.
+- Includes exploratory analysis of rating distributions and dataset dimensions.
 
-- Jupyter notebooks with baseline recommenders
-- Data preprocessing utilities
-- Model evaluation scripts
-- Example datasets (or links to public ones, e.g. MovieLens)
+## Requirements
+Install dependencies with:
+```bash
+pip install -r requirements.txt
+```
+
+## Data Sources
+- Movie metadata: https://files.grouplens.org/datasets/movielens/ml-100k/u.item
+- Ratings data: https://files.grouplens.org/datasets/movielens/ml-100k/u.data
