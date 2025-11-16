@@ -12,3 +12,5 @@ __pycache__/
 .env.*
 .idea/
 .vscode/
+CIFAR-100-dataset/
+classification-dataset/
