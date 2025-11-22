@@ -1,1 +1,1 @@
-# directional-classification
+# Directional Classification
