@@ -1,4 +1,5 @@
 venv/
-*.pdf
-dataset/
 .venv/
+dataset/
+*.docx
+*.pdf
