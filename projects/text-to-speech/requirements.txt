@@ -1,5 +1,0 @@
-﻿gTTS
-librosa
-soundfile
-torch
-transformers
