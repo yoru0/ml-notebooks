@@ -1,0 +1,16 @@
+data/
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+*.log
+.DS_Store
+.env
+.env.*
+.idea/
+.vscode/
+CIFAR-100-dataset/
+classification-dataset/
