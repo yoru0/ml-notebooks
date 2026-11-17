@@ -5,15 +5,15 @@ Notebook experiments for basic bioinformatics tasks: loading FASTA/GenBank seque
 ## Repository Structure
 - `main.ipynb` - main analysis notebook combining alignment, translation, and summary plots.
 - `sequence.fasta` / `sequence.gb` - input nucleotide sequences in FASTA and GenBank formats.
-- `requirements.txt` - Python dependencies required to execute the notebook.
+- `pyproject.toml` / `uv.lock` - Python dependencies, managed with uv.
 
 ## Setup
-1. Install Python 3.10 or newer.
-2. (Optional) create and activate a virtual environment.
-3. Install dependencies:
+1. Install [uv](https://docs.astral.sh/uv/). It provides Python 3.12 automatically.
+2. Install the dependencies:
    ```bash
-   pip install -r requirements.txt
+   uv sync
    ```
+3. Open `main.ipynb` with the `.venv` kernel in VS Code, or start Jupyter with `uv run --with jupyterlab jupyter lab`.
 
 ## Notebook Highlights
 - Imports sequences with Biopython and extracts selected regions for comparison.

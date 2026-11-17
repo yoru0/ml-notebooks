@@ -20,10 +20,13 @@ func defaultConfig() Config {
 		repo = filepath.Dir(wd)
 	}
 
-	venvPython := filepath.Join(repo, "venv", "Scripts", "python.exe")
-	pythonExe := venvPython
-	if _, err := os.Stat(venvPython); err != nil {
-		pythonExe = "py"
+	pythonExe := "py"
+	for _, dir := range []string{".venv", "venv"} {
+		candidate := filepath.Join(repo, dir, "Scripts", "python.exe")
+		if _, err := os.Stat(candidate); err == nil {
+			pythonExe = candidate
+			break
+		}
 	}
 	pyScript := filepath.Join(repo, "py", "recognizer.py")
 

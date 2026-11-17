@@ -13,7 +13,7 @@ A hand gesture recognition system that controls media playback using your webcam
 
 ### Prerequisites
 
-- Python 3.8+
+- [uv](https://docs.astral.sh/uv/) (installs Python 3.12)
 - Go 1.19+
 - Webcam
 - Windows 10/11
@@ -26,11 +26,9 @@ A hand gesture recognition system that controls media playback using your webcam
    cd gestures
    ```
 
-2. Install Python dependencies:
+2. Install Python dependencies with [uv](https://docs.astral.sh/uv/) (from the repository root):
    ```bash
-   python -m venv venv
-   venv\Scripts\activate
-   pip install -r requirements.txt
+   uv sync
    ```
 
 3. Run the application:

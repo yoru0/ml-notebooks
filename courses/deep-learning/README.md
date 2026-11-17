@@ -3,11 +3,14 @@
 Collection of Jupyter notebooks that walk through fundamental deep learning workflows using TensorFlow and the Python data-science stack.
 
 ## Getting Started
-1. Install Python 3.10 or newer.
-2. (Optional) create and activate a virtual environment.
-3. Install dependencies:
+1. Install [uv](https://docs.astral.sh/uv/). It provides Python 3.12 automatically.
+2. Install the dependencies (from this folder):
    ```bash
-   pip install -r requirements.txt
+   uv sync
+   ```
+3. Open a notebook in VS Code with the `.venv` kernel, or start Jupyter:
+   ```bash
+   uv run --with jupyterlab jupyter lab
    ```
 
 ## Notes

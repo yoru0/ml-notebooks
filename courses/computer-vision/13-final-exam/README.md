@@ -3,9 +3,9 @@
 Computer vision mini-project for a final exam. It explores a full local-feature pipeline (Gaussian smoothing → Canny edges → Harris corners → descriptor extraction → matching → homography via RANSAC) in two notebook versions: a deliberately unstable baseline and a corrected, annotated pass.
 
 ## Setup
-1) Install Python 3.10+ and pip.  
-2) (Optional) Create a virtual environment: `py -m venv venv && .\\venv\\Scripts\\activate`.  
-3) Install deps: `pip install -r requirements.txt`. If you do not already have a notebook runtime, add `pip install jupyter`.  
+1) Install [uv](https://docs.astral.sh/uv/). It provides Python 3.12 automatically.
+2) From the `courses/computer-vision` folder run `uv sync`. The final exam uses that shared environment.
+3) Open the notebooks with the `.venv` kernel in VS Code, or start Jupyter with `uv run --with jupyterlab jupyter lab`.
 4) Add your own image pairs into `submission/dataset/`.
 
 ## Running the notebooks

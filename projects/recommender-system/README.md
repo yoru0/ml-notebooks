@@ -9,9 +9,9 @@ Notebook-based implementation of a user-user collaborative filtering recommender
 - Includes exploratory analysis of rating distributions and dataset dimensions.
 
 ## Requirements
-Install dependencies with:
+Install [uv](https://docs.astral.sh/uv/) (it provides Python 3.12), then install the dependencies from this folder:
 ```bash
-pip install -r requirements.txt
+uv sync
 ```
 
 ## Data Sources

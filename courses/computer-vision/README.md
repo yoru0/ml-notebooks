@@ -4,10 +4,13 @@ Hands-on computer vision mini-projects built with Python and OpenCV. Each folder
 
 ## Getting Started
 
-1. Install Python 3.10 or newer.
-2. (Optional) Create a virtual environment and activate it.
-3. Install dependencies:
+1. Install [uv](https://docs.astral.sh/uv/). It provides Python 3.12 automatically.
+2. Install the dependencies (from this folder):
    ```bash
-   pip install -r requirements.txt
+   uv sync
    ```
-4. Run any of the scripts in the subfolders.
+3. Run any script from inside its own lesson folder, for example:
+   ```bash
+   cd 04-edge-detection
+   uv run python canny_edge_detection.py
+   ```

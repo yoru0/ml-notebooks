@@ -27,7 +27,7 @@ git clone https://github.com/yoru0/Mental-Health-Classification.git
 
 ### Run frontend
 ```
-cd frontend
+cd web
 npm install
 npm run dev
 ```
@@ -35,12 +35,11 @@ Then copy the localhost and paste it on your browser
 
 ### Run server
 ```
-cd server
-python -m venv venv
-venv/Scripts/activate
-pip install -r requirements.txt
-python api.py
+uv sync
+cd api
+uv run python api.py
 ```
+To run the training notebook instead, install its extra packages with `uv sync --group notebook`.
 
 ## Preview
 ![image](https://github.com/user-attachments/assets/1bdc6729-7d9c-42f7-b02b-8dd52fb7579a)

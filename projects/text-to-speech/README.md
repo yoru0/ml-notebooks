@@ -6,12 +6,12 @@ Notebook demonstrating speech-to-text inference with Wav2Vec2 and text-to-speech
 - main.ipynb - end-to-end workflow for automatic speech recognition and speech synthesis.
 
 ## Getting Started
-1. Install Python 3.9 or newer.
-2. (Optional) create and activate a virtual environment.
-3. Install dependencies:
+1. Install [uv](https://docs.astral.sh/uv/). It provides Python 3.12 automatically.
+2. Install the dependencies:
    ```bash
-   pip install -r requirements.txt
+   uv sync
    ```
+3. Open `main.ipynb` with the `.venv` kernel in VS Code, or start Jupyter with `uv run --with jupyterlab jupyter lab`.
 
 ## Usage
 ### Speech to Text

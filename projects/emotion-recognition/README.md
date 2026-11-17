@@ -14,24 +14,21 @@ The workflow expects the RAVDESS Audio Speech Actor archive (`Audio_Speech_Actor
 
 ## Getting Started
 ### Prerequisites
-- Python 3.10 or newer
-- `pip`
-- (Recommended) a virtual environment tool such as `venv`, `conda`, or `pipenv`
+- [uv](https://docs.astral.sh/uv/) (installs Python 3.12 and the dependencies)
 
 ### Installation
 1. Clone the repository.
-2. Create and activate your virtual environment.
-3. Install dependencies: `pip install -r requirements.txt`
+2. Install the dependencies: `uv sync`
 
 ## Running the Notebook
-1. Launch JupyterLab/Notebook or open `main.ipynb` in VS Code.
+1. Open `main.ipynb` in VS Code with the `.venv` kernel, or start Jupyter with `uv run --with jupyterlab jupyter lab`.
 2. Execute the cells sequentially. The notebook will download the dataset, perform EDA, extract features, split the data, train the CNN (batch size 64, 100 epochs), and plot training history alongside the confusion matrix.
 3. The final "Uji Coba" section provides `predict_sample` examples that play audio clips and display the model’s predictions.
 4. Use the "Save & Load Model" section if you want to persist trained weights or reuse them in later sessions.
 
 ## Repository Structure
 - `main.ipynb` – complete pipeline covering data ingestion, EDA, preprocessing, model training, evaluation, saving/loading, and sample inference.
-- `requirements.txt` – Python dependencies needed to run the notebook.
+- `pyproject.toml` / `uv.lock` – Python dependencies, managed with uv.
 
 ## Notes
 - CPU training can take a while; enable a GPU-backed TensorFlow install if available.
