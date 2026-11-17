@@ -1,0 +1,2 @@
+Dataset link:
+https://www.kaggle.com/datasets/muratkokludataset/rice-image-dataset?select=Rice_Image_Dataset
