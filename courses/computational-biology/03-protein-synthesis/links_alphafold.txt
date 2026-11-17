@@ -1,0 +1,4 @@
+Google Collab: https://colab.research.google.com/github/sokrypton/ColabFold/blob/main/AlphaFold2.ipynb#scrollTo=kOblAo-xetgx
+
+Ambil data: 
+- https://www.uniprot.org/uniprotkb/O70632/entry (UniProt)
