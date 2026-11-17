@@ -1,46 +1,27 @@
 ## General
-A simple website to classify whether a text is mental health related or not.
-The website is coded using react for frontend and flask for backend.
-And then it uses machine learning model to classify the text, in this case it uses voting classifier.
-The main problem is it does not have a login nor register features, so every text written will be stored in a single database and everyone can see the history.
+A notebook project that classifies whether a text is mental health related or not.
+It compares several machine learning models, from a voting classifier to an LSTM, and saves the final voting classifier and its TF-IDF vectorizer as `.joblib` files.
 
 ## Files & Folders
-- Web -> contains the source files such as assets, components, and page
-- Api -> contains the backend (api.py) and model used (.joblib)
-- Python Notebook -> the models tested from voting classifier to lstm (model_selection.ipynb) 
-
-## Features
-- Classify text using a machine learning model
-- View history of previous classifications
-- Delete text in history (delete single or all)
-- User-friendly interface??
-
-## Notes
-Update - 22/5/2025 - Done?? Maybe...
-Update 2.0 - 26/5/2025 - Done???
+- `model_selection.ipynb` -> the models tested, from voting classifier to LSTM
+- `dataset/` -> the training data
+- `voting_model.joblib`, `tfidf_vectorizer.joblib`, `model.joblib` -> the saved models
 
 ## How to use
-### Clone repo in cmd
+### Clone repo
 ```
-git clone https://github.com/yoru0/Mental-Health-Classification.git
+git clone https://github.com/yoru0/ml-notebooks.git
+cd ml-notebooks/projects/odi-nlp-classifier
 ```
 
-### Run frontend
-```
-cd web
-npm install
-npm run dev
-```
-Then copy the localhost and paste it on your browser
-
-### Run server
+### Install and run
 ```
 uv sync
-cd api
-uv run python api.py
 ```
-To run the training notebook instead, install its extra packages with `uv sync --group notebook`.
+Then open `model_selection.ipynb` in VS Code with the `.venv` kernel, or start Jupyter with `uv run --with jupyterlab jupyter lab`.
 
-## Preview
-![image](https://github.com/user-attachments/assets/1bdc6729-7d9c-42f7-b02b-8dd52fb7579a)
-![image](https://github.com/user-attachments/assets/3846a7a2-b12f-46b4-8899-e08f5b3551bd)
+## Notes
+- The saved `.joblib` models were trained with scikit-learn 1.6.1, which is why `pyproject.toml` pins that version. Loading them with a different scikit-learn version can fail or warn.
+- Update - 22/5/2025 - Done?? Maybe...
+- Update 2.0 - 26/5/2025 - Done???
+- The Flask API and React frontend that used to live here were removed, so this project is the notebook and its saved models only.

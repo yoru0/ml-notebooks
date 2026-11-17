@@ -1,48 +1,47 @@
-# Gesture Media Control
+# Gesture Recognition
 
-A hand gesture recognition system that controls media playback using your webcam.
+A hand gesture recognizer built with Python, OpenCV and MediaPipe. It reads your webcam, detects media-control gestures, and prints each detection as a JSON event.
 
-## Features
+## Gestures
 
-- Play/Pause: Make a fist then open your hand
-- Next Track: Two-finger swipe left  
-- Previous Track: Two-finger swipe right
-- Real-time gesture detection with confidence filtering
+- Play/Pause: make a fist, then open your hand within 1 second
+- Next: show two fingers (peace sign) and swipe left
+- Previous: show two fingers (peace sign) and swipe right
+- Detections are filtered by a confidence threshold
 
 ## Installation
 
 ### Prerequisites
 
 - [uv](https://docs.astral.sh/uv/) (installs Python 3.12)
-- Go 1.19+
 - Webcam
-- Windows 10/11
 
 ### Setup
 
-1. Clone the repository:
+1. Clone the repository and open this project:
    ```bash
-   git clone https://github.com/yoru0/gestures.git
-   cd gestures
+   git clone https://github.com/yoru0/ml-notebooks.git
+   cd ml-notebooks/projects/gesture-recognition
    ```
 
-2. Install Python dependencies with [uv](https://docs.astral.sh/uv/) (from the repository root):
+2. Install the dependencies:
    ```bash
    uv sync
    ```
 
-3. Run the application:
+3. Run the recognizer:
    ```bash
-   cd go
-   go run .
+   uv run python py/recognizer.py
    ```
 
 ## Usage
 
-The application will open your camera and start detecting gestures:
+The recognizer opens your camera and starts detecting gestures. Each detection is printed to standard output as one JSON line, for example:
 
-- **Play/Pause**: Make a fist, then open your hand within 1 second
-- **Next**: Show two fingers (peace sign) and swipe left
-- **Previous**: Show two fingers (peace sign) and swipe right
+```json
+{"gesture": "next", "confidence": 0.91, "hand": "Right", "ts": 1763000000}
+```
 
-Press 'q' in the camera window to quit.
+Logs go to standard error, so another program can read the events from standard output. This project no longer includes a launcher that turns events into media key presses.
+
+Press `q` in the camera window to quit.
