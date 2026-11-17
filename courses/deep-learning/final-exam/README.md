@@ -1,4 +1,4 @@
-# Deep Learning Mid Exam
+# Deep Learning Final Exam
 
 The repo bundles two notebook-based solutions: a regression model for indoor climate forecasting and a generative/classification pipeline for a CIFAR-style image subset.
 

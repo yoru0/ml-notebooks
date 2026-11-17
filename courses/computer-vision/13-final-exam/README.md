@@ -1,6 +1,6 @@
-# Computer Vision Mid Exam
+# Computer Vision Final Exam
 
-Computer vision mini-project for a midterm exam. It explores a full local-feature pipeline (Gaussian smoothing → Canny edges → Harris corners → descriptor extraction → matching → homography via RANSAC) in two notebook versions: a deliberately unstable baseline and a corrected, annotated pass.
+Computer vision mini-project for a final exam. It explores a full local-feature pipeline (Gaussian smoothing → Canny edges → Harris corners → descriptor extraction → matching → homography via RANSAC) in two notebook versions: a deliberately unstable baseline and a corrected, annotated pass.
 
 ## Setup
 1) Install Python 3.10+ and pip.  
