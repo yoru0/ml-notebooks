@@ -6,8 +6,8 @@ import math
 face_cascade = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
 face_recognizer = cv2.face.LBPHFaceRecognizer_create()
 
-train_dir = "images/train/"
-test_dir = "images/test/"
+train_dir = "../11-face-recognition/dataset/train/"
+test_dir = "../11-face-recognition/dataset/test/"
 
 # simpan label
 classes = os.listdir(train_dir)
@@ -21,10 +21,10 @@ def train_test_model():
     for class_id, parent_path in enumerate(classes):
         face_dir = os.path.join(train_dir, parent_path)
         face_paths = os.listdir(face_dir)
-        # images/train/hemsworth
+        # dataset/train/hemsworth
         for path in face_paths:
             full_path = os.path.join(face_dir, path)
-            # images/train/hemsworth/1.jpg
+            # dataset/train/hemsworth/1.jpg
             gray = cv2.imread(full_path, cv2.IMREAD_GRAYSCALE)
             # hitung multi scales
             detected_faces = face_cascade.detectMultiScale(gray, 1.2, 5)

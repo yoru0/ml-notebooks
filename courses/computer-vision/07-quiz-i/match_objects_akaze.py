@@ -3,10 +3,10 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
-data_folder = "Images/Data/"
+data_folder = "../06-image-matching/dataset/data/"
 data = [cv2.imread(data_folder + f) for f in os.listdir(data_folder)]
 
-images = ["Images/Object.png", "Images/Object2.png", "Images/Object3.png"]
+images = ["../06-image-matching/dataset/Object.png", "../06-image-matching/dataset/Object2.png", "../06-image-matching/dataset/Object3.png"]
 
 akaze = cv2.AKAZE_create()
 flann = cv2.FlannBasedMatcher(dict(algorithm=1), dict(checks=50))

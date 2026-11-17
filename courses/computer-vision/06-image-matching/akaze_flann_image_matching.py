@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-PATH = "Images/"
+PATH = "dataset/"
 object = cv2.imread(PATH + "Object.png")
 # object = cv2.imread(PATH + 'Object2.png')
 
@@ -13,7 +13,7 @@ object = cv2.imread(PATH + "Object.png")
 object = cv2.cvtColor(object, cv2.COLOR_BGRA2RGB)
 
 # Akses dataset
-DATA_PATH = PATH + "Data/"
+DATA_PATH = PATH + "data/"
 data = []
 for image_path in os.listdir(DATA_PATH):
     image_path = DATA_PATH + image_path

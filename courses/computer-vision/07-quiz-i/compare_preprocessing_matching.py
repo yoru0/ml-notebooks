@@ -4,8 +4,8 @@ import numpy as np
 from matplotlib import pyplot as plt
 
 
-target_path = "Images/Object.png"
-data_folder = "Images/Data/"
+target_path = "../06-image-matching/dataset/Object.png"
+data_folder = "../06-image-matching/dataset/data/"
 
 
 # Median Blur
@@ -76,8 +76,8 @@ def find_best_match(preprocess_func, title):
 
 
 find_best_match(preprocess_v1, "Version 1 (Median Blur)")
-target_path = "Images/Object2.png"
+target_path = "../06-image-matching/dataset/Object2.png"
 find_best_match(preprocess_v2, "Version 2 (Gaussian Blur)")
 
-target_path = "Images/Object3.png"
+target_path = "../06-image-matching/dataset/Object3.png"
 find_best_match(preprocess_v2, "Version 2 (Gaussian Blur)")

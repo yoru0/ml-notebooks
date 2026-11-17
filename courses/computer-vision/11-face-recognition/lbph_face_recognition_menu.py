@@ -6,8 +6,8 @@ import math
 face_cascade = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
 face_recognizer = cv2.face.LBPHFaceRecognizer_create()
 
-train_dir = "images/train/"
-test_dir = "images/test/"
+train_dir = "dataset/train/"
+test_dir = "dataset/test/"
 
 classes = os.listdir(train_dir)
 
