@@ -17,10 +17,16 @@ Public Kaggle datasets need no API key. The exceptions are Kaggle *competitions*
 | `courses/machine-learning/02-linear-regression` | House Prices (`train.csv`) | [Kaggle: lespin/house-prices-dataset](https://www.kaggle.com/datasets/lespin/house-prices-dataset) (mirror of the competition files) | `kagglehub` | kagglehub cache |
 | `courses/machine-learning/04-recommender-system` | MovieLens 100K | [GroupLens](https://grouplens.org/datasets/movielens/100k/) | `pd.read_csv(<url>)` | not saved |
 | `courses/natural-language-processing/05-naive-bayes` | IMDB Dataset of 50K Movie Reviews | [Kaggle: lakshmi25npathi/imdb-dataset-of-50k-movie-reviews](https://www.kaggle.com/datasets/lakshmi25npathi/imdb-dataset-of-50k-movie-reviews) | `kagglehub` | kagglehub cache |
-| `courses/speech-recognition/07-keyword-spotting` | Google Speech Commands v0.02, keywords `follow`, `learn`, `tree`, `visual` (**~2.3 GB download**, only these 4 words are kept) | [TensorFlow: speech_commands_v0.02](http://download.tensorflow.org/data/speech_commands_v0.02.tar.gz) | notebook cell (`keyword-spotting-review-2.ipynb`) | `dataset/<word>/` |
-| `projects/emotion-recognition` | RAVDESS Audio Speech Actors 01–24 (~200 MB) | [Zenodo record 1188976](https://zenodo.org/records/1188976) | notebook cell | `Audio_Speech_Actors_01-24.zip`, `speech_dataset/` |
+| `courses/speech-recognition/07-keyword-spotting` | Google Speech Commands v0.02, keywords `follow`, `learn`, `tree`, `visual` (**~2.3 GB download**, only these 4 words are kept) | [TensorFlow: speech_commands_v0.02](http://download.tensorflow.org/data/speech_commands_v0.02.tar.gz) | notebook cell (`keyword-spotting-review-2.ipynb`) | `~/.cache/ml-notebooks/speech-commands/<word>/` |
+| `projects/emotion-recognition` | RAVDESS Audio Speech Actors 01–24 (~200 MB) | [Zenodo record 1188976](https://zenodo.org/records/1188976) | notebook cell | `~/.cache/ml-notebooks/` |
 | `projects/bitcoin-direction-rnn-lstm` | Bitcoin Historical Data (1-minute bars) | [Kaggle: mczielinski/bitcoin-historical-data](https://www.kaggle.com/datasets/mczielinski/bitcoin-historical-data) | `kagglehub` | kagglehub cache |
 | `projects/stock-forecasting` | BTC-USD prices | [Yahoo Finance](https://finance.yahoo.com/) | `yfinance` | not saved |
+| `projects/skin-cancer-classification` | Skin cancer ISIC, 9 classes (2,357 images, ~826 MB) | [Kaggle: nodoubttome/skin-cancer9-classesisic](https://www.kaggle.com/datasets/nodoubttome/skin-cancer9-classesisic) | `kagglehub` | kagglehub cache, re-split copy in `~/.cache/ml-notebooks/skin-cancer` |
+| `courses/computational-biology/04-sequence-alignment`, `05-kmer-classification` | NCBI nucleotide records NC_035298.1 and MK312630.1 | [NCBI Nucleotide](https://www.ncbi.nlm.nih.gov/nuccore/) | `Bio.Entrez.efetch` | not saved |
+| `courses/computational-biology/04-sequence-alignment/fasta-genbank-alignment-exercise.ipynb`, `projects/sequence-alignment` | NCBI records M99367.1 (FASTA) and BI431008 (GenBank) | [NCBI Nucleotide](https://www.ncbi.nlm.nih.gov/nuccore/) | `Bio.Entrez.efetch` | not saved |
+| `courses/machine-learning/05-assignment`, `courses/natural-language-processing/assignment-3`, `projects/odi-nlp-classifier` | Mental Health Corpus (27,977 posts, `text` + `label`) | [Kaggle: reihanenamdari/mental-health-corpus](https://www.kaggle.com/datasets/reihanenamdari/mental-health-corpus) | `kagglehub` | kagglehub cache |
+| `courses/natural-language-processing/06-quiz` | Rotten Tomatoes movies and critic reviews | [Kaggle: andrezaza/clapper-massive-rotten-tomatoes-movies-and-reviews](https://www.kaggle.com/datasets/andrezaza/clapper-massive-rotten-tomatoes-movies-and-reviews) | `kagglehub` | kagglehub cache |
+| `courses/deep-learning/05-recurrent-neural-networks` | Tatoeba English–German sentence pairs (the 64,000 shortest) | [manythings.org/anki](https://www.manythings.org/anki/) (from [Tatoeba](https://tatoeba.org/), CC BY 2.0 FR) | notebook cell (`urllib`) | not saved |
 
 Notes:
 - The vegetable subset is built by taking `0001.jpg`–`0500.jpg` of each class from the Kaggle `train` split. This matches the file names of the copy that used to be committed, but it was not compared byte for byte.
@@ -33,20 +39,29 @@ Notes:
 
 1. Open <https://www.kaggle.com/competitions/dog-breed-identification> and click **Join Competition** to accept the rules.
 2. Create an API token in your Kaggle account settings and save it as `~/.kaggle/kaggle.json`.
-3. From `projects/dog-breed-classification`, run:
+3. Run the notebooks. They call `kagglehub.competition_download("dog-breed-identification")`, which caches the files outside the repo. The processed splits go to `~/.cache/ml-notebooks/dog-breed-processed`.
 
-   ```bash
-   uv run --with kaggle kaggle competitions download -c dog-breed-identification -p dataset/dog-breed-identification
-   unzip dataset/dog-breed-identification/dog-breed-identification.zip -d dataset/dog-breed-identification
-   ```
+This download has not been run end to end.
 
-The notebooks expect `dataset/dog-breed-identification/{train/, test/, labels.csv}`. This download has not been run end to end.
+## Course files without a notebook
 
-## Not covered (source unknown)
+These files used to be committed but no notebook in the repo reads them. Public copies:
 
-These still point at the copy that is in the repo, or at a Google Drive link. I could not confirm their original source, so they were not changed:
+- `courses/deep-learning/04-word-embeddings`: [Kaggle: sbhatti/financial-sentiment-analysis](https://www.kaggle.com/datasets/sbhatti/financial-sentiment-analysis) (`data.csv`, 5,842 rows). The old committed file was identical.
+- `courses/natural-language-processing/nlp-quiz`: [Kaggle: crowdflower/twitter-airline-sentiment](https://www.kaggle.com/datasets/crowdflower/twitter-airline-sentiment) (`Tweets.csv`, use the `airline_sentiment` and `text` columns). The old committed file was a subset of it.
 
-- Mental health text classification (`machine-learning/05`, `natural-language-processing/assignment-3`, `projects/odi-nlp-classifier`): Google Drive link.
-- Skin cancer ISIC (`projects/skin-cancer-classification`): Google Drive link.
-- `movie_sentiment.csv`, `movie_rating.csv`, `Tweets.csv` (NLP quizzes), `dictionary.csv` (deep-learning/05, in `dataset/`), the room-climate CSVs (deep-learning/13), and the computer-vision images (`dataset/` folders in 06, 10, 11, 13).
-- `projects/sequence-alignment/dataset/sequence.fasta` and `sequence.gb`: small, so they are kept in the repo.
+```python
+import kagglehub
+path = kagglehub.dataset_download("sbhatti/financial-sentiment-analysis")
+```
+
+## Notes on the replaced files
+
+- `movie_sentiment.csv` and `movie_rating.csv` (NLP 06-quiz) were replaced by the Rotten Tomatoes dataset above, which is the closest public match: about 91% of the old `movie_sentiment.csv` rows appear in it. The old `movie_rating.csv` was IMDb user reviews with the film's IMDb rating. No public copy was found, so the quiz notebooks now build `Title`, `Rating` (audience score ÷ 10) and `Review` from Rotten Tomatoes. Results differ from the old outputs.
+- The skin cancer notebook used a Google Drive zip of 3,780 images (train/test/val). The Kaggle copy has 2,357 images in Train/Test only, so the notebook pools them and splits again 70/20/10. Results will differ from the old outputs.
+- `dictionary.csv` (deep-learning/05) was an older Tatoeba snapshot (99.7% of its pairs are still in the current file). The notebook now uses the 64,000 shortest current pairs.
+
+## Not covered (kept in the repo or unknown source)
+
+- The room-climate CSVs (`courses/deep-learning/13-final-exam`): supplied with the exam, not in the repo.
+- Computer-vision images (`dataset/` folders in 06, 10, 11, 13, plus `courses/computer-vision/dataset`): course-supplied or personal photos with no public download, so they are still committed. These are the only data files left in the repo.
