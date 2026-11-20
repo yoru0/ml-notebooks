@@ -2,7 +2,7 @@
 
 **Instruksi dokumen / isi dokumen:**
 
-Dalam zip file, terdapat folder `Single Model`, file `ModelList.ipynb`, dan `ModelList.pdf`. Dalam folder `Single Model`, itu berisikan file-file .ipynb dimana kita testing menggunakan 1 model saja dalam setiap file, contohnya SVM, LR, atau Voting Classifier. Lalu yang paling penting yaitu dalam `ModelList.ipynb`, itu berisikan gabungan semua model sehingga mempermudah evaluasi dari setiap model, mulai dari voting classifier hingga LSTM.
+Dalam zip file, terdapat folder `Single Model`, dan file `ModelList.ipynb`. Dalam folder `Single Model`, itu berisikan file-file .ipynb dimana kita testing menggunakan 1 model saja dalam setiap file, contohnya SVM, LR, atau Voting Classifier. Lalu yang paling penting yaitu dalam `ModelList.ipynb`, itu berisikan gabungan semua model sehingga mempermudah evaluasi dari setiap model, mulai dari voting classifier hingga LSTM.
 
 List model yang ada dalam ModelList.ipynb:
 
@@ -13,7 +13,7 @@ List model yang ada dalam ModelList.ipynb:
 - Logistic Regression
 - LSTM
 
-Jadi untuk kemudahan, bisa langsung dari ModelList.ipynb saja. Link (ada pdf juga): <https://colab.research.google.com/drive/1tL5fM7DbnZSJfHqxXmxLU5u8szyYwFSf?usp=sharing>
+Jadi untuk kemudahan, bisa langsung dari ModelList.ipynb saja.
 
 ## 1. Berikan alasan mengapa kalian memilih dan menggunakan model tersebut.
 
