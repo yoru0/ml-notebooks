@@ -3,7 +3,7 @@
 Notebook project comparing SimpleRNN and LSTM models for predicting directional movement of Bitcoin 1‑minute bars.
 
 ## Contents
-- `RNN_LSTM.ipynb`: end-to-end notebook (preprocessing, RNN/LSTM training, evaluation, plots, analysis).
+- `rnn-lstm.ipynb`: end-to-end notebook (preprocessing, RNN/LSTM training, evaluation, plots, analysis).
 
 ## Dataset
 - Source: https://www.kaggle.com/datasets/mczielinski/bitcoin-historical-data (Bitcoin Historical Data, 1-minute bars).
@@ -12,7 +12,7 @@ Notebook project comparing SimpleRNN and LSTM models for predicting directional 
 ## Running the notebook
 1) Ensure Python with TensorFlow, scikit-learn, pandas, seaborn, matplotlib is available.
 2) Download `btcusd_1-min_data.csv` from Kaggle (see Dataset) and place it next to the notebook.
-3) Open and run `RNN_LSTM.ipynb` top-to-bottom to reproduce preprocessing, training, and comparison plots.
+3) Open and run `rnn-lstm.ipynb` top-to-bottom to reproduce preprocessing, training, and comparison plots.
 
 ## What the notebook covers
 - Preprocessing: timestamp parsing, sorting, NA drop, MinMax scaling, directional label creation with lookback windows.

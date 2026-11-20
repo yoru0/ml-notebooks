@@ -9,7 +9,7 @@ Computer vision mini-project for a final exam. It explores a full local-feature 
 4) Add your own image pairs into `submission/dataset/`.
 
 ## Running the notebooks
-- Open either notebook in Jupyter/VS Code. Start with `vision_engine_v1.ipynb` to see the unstable behavior, then compare against `vision_engine_v2.ipynb` to trace the fixes (notably the Gaussian kernel normalization and parameter tuning across the pipeline).  
+- Open either notebook in Jupyter/VS Code. Start with `vision-engine-v1.ipynb` to see the unstable behavior, then compare against `vision-engine-v2.ipynb` to trace the fixes (notably the Gaussian kernel normalization and parameter tuning across the pipeline).  
 - Update the image path constants at the top of each notebook if your filenames differ. Execution prints OpenCV/NumPy versions and visualizes each stage inline.
 
 ## Notes

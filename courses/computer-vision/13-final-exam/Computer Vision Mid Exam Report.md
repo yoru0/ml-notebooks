@@ -1,12 +1,8 @@
 # Computer Vision Mid Exam
 
-Nama: REDACTED_NAME
+**File Soal:** vision-engine-v1.ipynb
 
-
-
-**File Soal:** vision_engine_v1.ipynb
-
-**File Jawaban:** vision_engine_v2.ipynb
+**File Jawaban:** vision-engine-v2.ipynb
 
 - **Algorithmic Instability and Theoretical Comprehension**
   - **Identify and explain the mathematical or computational cause of each instability.**
@@ -163,7 +159,7 @@ Test descriptor HOG ada dalam code untuk ketiga pair.
 - **Image Correspondence and Recognition Application**
   - **Compute image correspondences between your captured image pairs using your improved system.**
 
-Jawaban dan code semua ada di vision_engine_v2.ipynb
+Jawaban dan code semua ada di vision-engine-v2.ipynb
 
 ![image 24](assets/report-24.png)
 
