@@ -21,13 +21,13 @@ The workflow expects the RAVDESS Audio Speech Actor archive (`Audio_Speech_Actor
 2. Install the dependencies: `uv sync`
 
 ## Running the Notebook
-1. Open `main.ipynb` in VS Code with the `.venv` kernel, or start Jupyter with `uv run --with jupyterlab jupyter lab`.
+1. Open `ravdess-emotion-recognition.ipynb` in VS Code with the `.venv` kernel, or start Jupyter with `uv run --with jupyterlab jupyter lab`.
 2. Execute the cells sequentially. The notebook will download the dataset, perform EDA, extract features, split the data, train the CNN (batch size 64, 100 epochs), and plot training history alongside the confusion matrix.
 3. The final "Uji Coba" section provides `predict_sample` examples that play audio clips and display the model’s predictions.
 4. Use the "Save & Load Model" section if you want to persist trained weights or reuse them in later sessions.
 
 ## Repository Structure
-- `main.ipynb` – complete pipeline covering data ingestion, EDA, preprocessing, model training, evaluation, saving/loading, and sample inference.
+- `ravdess-emotion-recognition.ipynb` – complete pipeline covering data ingestion, EDA, preprocessing, model training, evaluation, saving/loading, and sample inference.
 - `pyproject.toml` / `uv.lock` – Python dependencies, managed with uv.
 
 ## Notes

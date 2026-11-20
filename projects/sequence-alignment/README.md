@@ -3,7 +3,7 @@
 Notebook experiments for basic bioinformatics tasks: loading FASTA/GenBank sequences, running pairwise alignments, translating to protein, and visualising sequence statistics.
 
 ## Repository Structure
-- `main.ipynb` - main analysis notebook combining alignment, translation, and summary plots.
+- `pairwise-sequence-alignment.ipynb` - main analysis notebook combining alignment, translation, and summary plots.
 - `pyproject.toml` / `uv.lock` - Python dependencies, managed with uv.
 
 ## Setup
@@ -12,7 +12,7 @@ Notebook experiments for basic bioinformatics tasks: loading FASTA/GenBank seque
    ```bash
    uv sync
    ```
-3. Open `main.ipynb` with the `.venv` kernel in VS Code, or start Jupyter with `uv run --with jupyterlab jupyter lab`.
+3. Open `pairwise-sequence-alignment.ipynb` with the `.venv` kernel in VS Code, or start Jupyter with `uv run --with jupyterlab jupyter lab`.
 
 ## Notebook Highlights
 - Imports sequences with Biopython and extracts selected regions for comparison.
