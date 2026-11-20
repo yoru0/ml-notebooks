@@ -36,11 +36,11 @@ Notes:
 3. From `projects/dog-breed-classification`, run:
 
    ```bash
-   uv run --with kaggle kaggle competitions download -c dog-breed-identification -p data/dog-breed-identification
-   unzip data/dog-breed-identification/dog-breed-identification.zip -d data/dog-breed-identification
+   uv run --with kaggle kaggle competitions download -c dog-breed-identification -p dataset/dog-breed-identification
+   unzip dataset/dog-breed-identification/dog-breed-identification.zip -d dataset/dog-breed-identification
    ```
 
-The notebooks expect `data/dog-breed-identification/{train/, test/, labels.csv}`. This download has not been run end to end.
+The notebooks expect `dataset/dog-breed-identification/{train/, test/, labels.csv}`. This download has not been run end to end.
 
 ## Not covered (source unknown)
 
@@ -48,5 +48,5 @@ These still point at the copy that is in the repo, or at a Google Drive link. I 
 
 - Mental health text classification (`machine-learning/05`, `natural-language-processing/assignment-3`, `projects/odi-nlp-classifier`): Google Drive link.
 - Skin cancer ISIC (`projects/skin-cancer-classification`): Google Drive link.
-- `movie_sentiment.csv`, `movie_rating.csv`, `Tweets.csv` (NLP quizzes), `dictionary.csv` (deep-learning/05), the room-climate CSVs (deep-learning/13), and the computer-vision images (`dataset/` folders in 06, 10, 11, 13).
-- `projects/sequence-alignment/sequence.fasta` and `sequence.gb`: small, so they are kept in the repo.
+- `movie_sentiment.csv`, `movie_rating.csv`, `Tweets.csv` (NLP quizzes), `dictionary.csv` (deep-learning/05, in `dataset/`), the room-climate CSVs (deep-learning/13), and the computer-vision images (`dataset/` folders in 06, 10, 11, 13).
+- `projects/sequence-alignment/dataset/sequence.fasta` and `sequence.gb`: small, so they are kept in the repo.

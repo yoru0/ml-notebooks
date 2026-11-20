@@ -4,7 +4,7 @@ Notebook experiments for basic bioinformatics tasks: loading FASTA/GenBank seque
 
 ## Repository Structure
 - `main.ipynb` - main analysis notebook combining alignment, translation, and summary plots.
-- `sequence.fasta` / `sequence.gb` - input nucleotide sequences in FASTA and GenBank formats.
+- `dataset/sequence.fasta` / `dataset/sequence.gb` - input nucleotide sequences in FASTA and GenBank formats.
 - `pyproject.toml` / `uv.lock` - Python dependencies, managed with uv.
 
 ## Setup

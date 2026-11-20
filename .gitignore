@@ -45,10 +45,11 @@ logs/
 Thumbs.db
 desktop.ini
 
-# Downloaded datasets (see DATASETS.md)
-data/
+# Downloaded datasets (see Datasets.md)
+projects/dog-breed-classification/dataset/
+courses/deep-learning/13-final-exam/submission/*/dataset/
 
-# Datasets downloaded by notebooks (see DATASETS.md)
+# Datasets downloaded by notebooks (see Datasets.md)
 courses/deep-learning/01-neural-networks/BankCustomerChurnPrediction.csv
 courses/deep-learning/02-regression-and-classification/weatherHistory.csv
 courses/deep-learning/06-transformers/dataset/
