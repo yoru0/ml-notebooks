@@ -4,7 +4,7 @@ It compares several machine learning models, from a voting classifier to an LSTM
 
 ## Files & Folders
 - `model-selection.ipynb` -> the models tested, from voting classifier to LSTM
-- `dataset/` -> the training data
+- The training data (Mental Health Corpus from Kaggle) is downloaded by the notebook on first run
 - `voting_model.joblib`, `tfidf_vectorizer.joblib`, `model.joblib` -> the saved models
 
 ## How to use
