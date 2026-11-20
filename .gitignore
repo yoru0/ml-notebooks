@@ -44,3 +44,6 @@ logs/
 ._*
 Thumbs.db
 desktop.ini
+
+# Downloaded datasets (see DATASETS.md)
+data/
