@@ -66,37 +66,129 @@ Diatas ini ada Matches untuk Pair pertama, dimana gambar teratas adalah gambar b
   - **Propose and implement corrected versions, with quantitative comparison.**
       - Gaussian Smoothing
 
-![image 9](assets/report-09.png)
+```python
+def gaussian_kernel(size: int, sigma: float) -> np.ndarray:
+    """
+    Fixed version
+    G(x,y) = (1/(2πσ²)) * exp(-(x²+y²)/(2σ²))
+    """
+    ax = np.arange(-(size//2), size//2 + 1)
+    xx, yy = np.meshgrid(ax, ax)
+
+    kernel = np.exp(-(xx**2 + yy**2) / (2 * sigma**2))
+    kernel = kernel / np.sum(kernel)
+
+    return kernel.astype(np.float32)
+```
 
 Kernel diperbaiki dengan memasukkan varians penuh pada eksponen dan normalisasi ∑K=1.
 
-![image 10](assets/report-10.png)
+```text
+Quantitative Analysis: Buggy vs Fixed Gaussian Kernel
+
+Kernel size: 7x7, sigma = 2.0
+
+Metric                    Buggy Kernel         Fixed Kernel
+-----------------------------------------------------------
+Sum (should be 1.0):      12.279130            1.000000
+Max value:                1.000000             0.046702
+Min value:                0.011109             0.004922
+Center value:             1.000000             0.046702
+Std deviation:            0.255659             0.011405
+
+Denominator comparison for sigma=2.0:
+Buggy: 2 x sigma = 2 x 2.0 = 4.0
+Fixed: 2 x sigma² = 2 x 2.0² = 8.0
+Ratio: 2.0x difference in spread
+```
 
 Perbandingan dan analisis menunjukkan kernel buggy menjumlah 12.279 dB dengan puncak 1.0, sedangkan versi fixed jumlahnya 1.0 dengan puncak 0.0467.
 
       - Canny Edge Detection
 
-![image 11](assets/report-11.png)
+```python
+def canny(img: np.ndarray, low: int=50, high: int=150) -> np.ndarray:
+    """
+    Canny uses double thresholding for hysteresis:
+    - Pixels > high_threshold -> strong edges (kept)
+    - Pixels > low_threshold -> weak edges (kept only if connected to strong)
+    - Pixels < low_threshold -> suppressed
+    """
+    return cv2.Canny(img, threshold1=low, threshold2=high)
+```
 
 Function diperbaiki dengan mengubah threshold1=low dan threshold2=high.
 
-![image 12](assets/report-12.png)
+```text
+Quantitative Analysis: Buggy vs Fixed Canny Edge Detection
+
+1A Canny Edge Counts: 24933 (Buggy) vs 45311 (Fixed)
+1B Canny Edge Counts: 346481 (Buggy) vs 19283 (Fixed)
+```
 
 Hitungan edge pixel pada Pair 1A, jumlah edge naik dari 24933 (buggy) menjadi 45311 (fixed) karena tepi penting tidak lagi dipotong; sebaliknya pada B, nilai turun karena noise yang tadinya salah dianggap “strong edge” sekarang tersaring.
 
       - Harris Corner Detection
 
-![image 13](assets/report-13.png)
+```python
+def harris_kps(R: np.ndarray, thresh: float=0.01, max_kps: int=500) -> List[cv2.KeyPoint]:
+    """
+    Harris keypoint extraction with adaptive threshold and non-maximum suppression.
+    """
+    thresh = thresh * R.max()
+    R_thresh = np.zeros_like(R)
+    R_thresh[R > thresh] = R[R > thresh]
+
+    R_dilated = cv2.dilate(R_thresh, None)
+    local_max = (R_thresh == R_dilated)
+    ys, xs = np.where(local_max & (R_thresh > 0))
+
+    strengths = R[ys, xs]
+    sorted_idx = np.argsort(-strengths)
+    if max_kps is not None:
+        sorted_idx = sorted_idx[:max_kps]
+
+    kps = [cv2.KeyPoint(float(xs[i]), float(ys[i]), 3) for i in sorted_idx]
+    return kps
+```
 
 Untuk function harris_response dinormalisasi ke [0,1], lalu di harris_kps dijadikan adaptif thresh * R.max() dan diikuti non max suppression sebelum dibatasi max 500 keypoints.
 
-![image 14](assets/report-14.png)
+```text
+Quantitative Analysis: Buggy vs Fixed Harris Corner Detection
+
+Image A Response Statistics:
+Buggy (raw):         Min=-7.183029e+07, Max=6.423012e+07, Mean=-1.654253e+04
+Fixed (normalized): Min=-0.000000, Max=1.000000, Mean=0.847904
+
+Image B Response Statistics:
+Buggy (raw):         Min=-5.187985e+07, Max=2.121732e+07, Mean=-2.182915e+04
+Fixed (normalized): Min=-0.000000, Max=1.000000, Mean=0.776632
+
+Corner Detection Results:
+Image A: Buggy=25 corners, Fixed=500 corners
+Image B: Buggy=7 corners, Fixed=500 corners
+```
 
 Hasilnya jauh lebih stabil dan banyak, pair 1 dari 25->500 (gambar A) dan 7->500 (gambar B).
 
       - RANSAC Homography
 
-![image 15](assets/report-15.png)
+```python
+def ransac_homography(kps1, kps2, matches, reproj=4.0, maxIters=2000):
+    """
+    - reproj=4.0 pixels (typical for noisy features)
+    - maxIters=2000 (gives high probability of finding good model)
+    """
+    if len(matches) < 4:
+        print("Not enough matches for RANSAC.")
+        return None, None
+
+    pts1 = np.float32([kps1[m.queryIdx].pt for m in matches]).reshape(-1,1,2)
+    pts2 = np.float32([kps2[m.trainIdx].pt for m in matches]).reshape(-1,1,2)
+    H, mask = cv2.findHomography(pts1, pts2, cv2.RANSAC, ransacReprojThreshold=reproj, maxIters=maxIters)
+    return H, mask
+```
 
 Parameter diperlonggar ke reproj=4 dan maxIters=2000. Hasilnya terlihat pada mask inlier. Untuk Pair-1 hasil buggy gagal total (0/1), sedangkan versi fixed menghasilkan 128/177 inlier dan HOG 138/145; Pair‑2 naik dari 0/4 menjadi 9/91 (patch) dan Pair‑3 dari 0/1 menjadi 17/110 (patch) serta 6/13 (HOG).
 
@@ -121,11 +213,94 @@ Peluang minimal untuk mendapatkan sampel bebas outlier berukuran s=4 dari propor
   - **Design and implement an improved classical descriptor (e.g., gradient-based HOG, LBP, or hybrid).**
       - Saya menambakan function extract_hog yang membangun descriptor HOG classic di sekitar setiap keypoint. Implementasinya menggunakan gradien x,y dihitung dengan Sobel, dikonversi ke magnitude dan orientasi 0-180 derajat, lalu setiap patch berukuran 20x20 diberikan bobot Gaussian agar kontribusi pusatnya lebih besar. Patch dibagi ke sel 5x5 pixel dengan histogram 8 bins. Setiap pixel menyalurkan magnitude ke dua bin terdekat menggunakan interpolasi linear. Histogram disatukan per blok 2x2 sel, dinormalisasi L2, dan di concat sehingga setiap keypoint menghasilkan vector 4x4x8x2 = 288.
 
-![image 16](assets/report-16.png)
+```python
+def extract_hog(img: np.ndarray, kps: List[cv2.KeyPoint], patch: int=20, cell_size: int=5, block_size: int=2, bins: int=8) -> Tuple[np.ndarray, List[int]]:
+    """Extract HOG descriptors at keypoint locations"""
+    r = patch // 2
+    H, W = img.shape[:2]
+    n_cells = patch // cell_size
+
+    gx = cv2.Sobel(img, cv2.CV_32F, 1, 0, ksize=3)
+    gy = cv2.Sobel(img, cv2.CV_32F, 0, 1, ksize=3)
+    magnitude, angle = cv2.cartToPolar(gx, gy, angleInDegrees=True)
+    angle = angle % 180
+
+    sigma = patch / 2.0
+    gaussian_window = cv2.getGaussianKernel(patch, sigma)
+    gaussian_weight = gaussian_window @ gaussian_window.T
+
+    descs, keep_idx = [], []
+
+    for i, kp in enumerate(kps):
+        x, y = int(round(kp.pt[0])), int(round(kp.pt[1]))
+        x0, x1, y0, y1 = x-r, x+r, y-r, y+r
+
+        if x0 < 0 or y0 < 0 or x1 > W or y1 > H:
+            continue
+
+        mag_patch = magnitude[y0:y1, x0:x1] * gaussian_weight
+        ang_patch = angle[y0:y1, x0:x1]
+
+        cells = np.zeros((n_cells, n_cells, bins), dtype=np.float32)
+        bin_width = 180.0 / bins
+
+        for cy in range(n_cells):
+            for cx in range(n_cells):
+                y_start, y_end = cy*cell_size, (cy+1)*cell_size
+                x_start, x_end = cx*cell_size, (cx+1)*cell_size
+
+                cell_mag = mag_patch[y_start:y_end, x_start:x_end]
+                cell_ang = ang_patch[y_start:y_end, x_start:x_end]
+
+                hist = np.zeros(bins, dtype=np.float32)
+                for m, a in zip(cell_mag.flatten(), cell_ang.flatten()):
+                    if m < 1e-5:
+                          continue
+                    b = int(np.floor(a / bin_width)) % bins
+                    hist[b] += m
+
+                cells[cy, cx] = hist
+
+        block_desc = []
+        for by in range(n_cells - block_size + 1):
+            for bx in range(n_cells - block_size + 1):
+                block = cells[by:by+block_size, bx:bx+block_size, :].flatten()
+
+                norm = np.linalg.norm(block)
+                if norm > 1e-6:
+                    block = block / norm
+                    block = np.clip(block, 0, 0.2)
+                    norm = np.linalg.norm(block)
+                    if norm > 1e-6:
+                        block = block / norm
+
+                block_desc.extend(block)
+
+        desc = np.array(block_desc, dtype=np.float32)
+        descs.append(desc)
+        keep_idx.append(i)
+
+    if len(descs) == 0:
+        n_blocks = (n_cells - block_size + 1) ** 2
+        desc_dim = n_blocks * (block_size ** 2) * bins
+        return np.zeros((0, desc_dim), dtype=np.float32), []
+
+    return np.stack(descs), keep_idx
+```
 
       - Dalam code, descriptor HOG dipakai menggantikan raw patch: D_A_hog, idxA_hog = extract_hog(A1, kpsA) dan D_B_hog, idxB_hog = extract_hog(B1, kpsB)
 
-![image 17](assets/report-17.png)
+```python
+# Visualization
+D_A_hog, idxA_hog = extract_hog(A1, kpsA)
+D_B_hog, idxB_hog = extract_hog(B1, kpsB)
+
+print("D_A_hog:", D_A_hog.shape, "D_B_hog:", D_B_hog.shape)
+```
+
+```text
+D_A_hog: (500, 288) D_B_hog: (500, 288)
+```
 
   - **Explain the theoretical advantage of your descriptor in terms of invariance and distinctiveness.**
       - Block HOG membangun histogram orientasi per sel, lalu dinormalisasi pada blok 2x2. Dua langkah ini memberi invariansi illumination: magnitude gradien (m = sqrt(Ix^2 + Iy^2) menghilangkan offset DC, dan normalisasi L2 pada setiap blok membuat deskriptor skala agnostic terhadap kontras (jika seluruh patch lebih terang, histogram akan dinormalisasi kembali ke panjang 1).
@@ -136,11 +311,93 @@ Peluang minimal untuk mendapatkan sampel bebas outlier berukuran s=4 dari propor
 
 Test descriptor HOG ada dalam code untuk ketiga pair.
 
-![image 18](assets/report-18.png)
+```python
+print("Fixed - HOG Descriptors")
+H, mask = ransac_homography(kpsA_f_hog, kpsB_f_hog, matchesA_hog, reproj=4.0, maxIters=2000)
+print("H:", H is not None, "inliers:", int(mask.sum()) if mask is not None else 0, "/", len(matchesA_hog))
 
-![image 19](assets/report-19.png)
+vis_matches_hog = cv2.drawMatches(
+    A1, kpsA_f_hog,
+    B1, kpsB_f_hog,
+    matchesA_hog, None,
+    matchColor=[0, 255, 0],
+    singlePointColor=[255, 0, 0],
+    matchesMask=(mask.ravel().tolist() if mask is not None else None),
+    flags=cv2.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS
+)
 
-![image 20](assets/report-20.png)
+plt.figure(figsize=(12, 6))
+plt.title("Matches (fixed - HOG descriptors)")
+plt.imshow(vis_matches_hog)
+plt.axis('off')
+plt.show()
+```
+
+```python
+print("\nFixed - HOG Descriptors")
+
+D_A2_hog, idxA2_hog = extract_hog(A2, kpsA2, patch=20, cell_size=5, bins=8)
+D_B2_hog, idxB2_hog = extract_hog(B2, kpsB2, patch=20, cell_size=5, bins=8)
+print("D_A2_hog:", D_A2_hog.shape, "D_B2_hog:", D_B2_hog.shape)
+
+matchesA2_hog = match_ratio(D_A2_hog, D_B2_hog, ratio=0.75)
+print("matches A2 hog:", len(matchesA2_hog))
+
+kpsA2_f_hog = kp_subset(kpsA2, idxA2_hog)
+kpsB2_f_hog = kp_subset(kpsB2, idxB2_hog)
+
+H2_hog, mask2_hog = ransac_homography(kpsA2_f_hog, kpsB2_f_hog, matchesA2_hog, reproj=4.0, maxIters=2000)
+print("H:", H2_hog is not None, "inliers:", int(mask2_hog.sum()) if mask2_hog is not None else 0, "/", len(matchesA2_hog))
+
+vis_matches2_hog = cv2.drawMatches(
+    A2, kpsA2_f_hog,
+    B2, kpsB2_f_hog,
+    matchesA2_hog, None,
+    matchColor=[0, 255, 0],
+    singlePointColor=[255, 0, 0],
+    matchesMask=(mask2_hog.ravel().tolist() if mask2_hog is not None else None),
+    flags=cv2.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS
+)
+
+plt.figure(figsize=(12, 6))
+plt.title("Matches 2 (fixed - HOG descriptors)")
+plt.imshow(vis_matches2_hog)
+plt.axis('off')
+plt.show()
+```
+
+```python
+print("\nFixed - HOG Descriptors")
+
+D_A3_hog, idxA3_hog = extract_hog(A3, kpsA3, patch=20, cell_size=5, bins=8)
+D_B3_hog, idxB3_hog = extract_hog(B3, kpsB3, patch=20, cell_size=5, bins=8)
+print("D_A3_hog:", D_A3_hog.shape, "D_B3_hog:", D_B3_hog.shape)
+
+matchesA3_hog = match_ratio(D_A3_hog, D_B3_hog, ratio=0.75)
+print("matches A3 hog:", len(matchesA3_hog))
+
+kpsA3_f_hog = kp_subset(kpsA3, idxA3_hog)
+kpsB3_f_hog = kp_subset(kpsB3, idxB3_hog)
+
+H3_hog, mask3_hog = ransac_homography(kpsA3_f_hog, kpsB3_f_hog, matchesA3_hog, reproj=4.0, maxIters=2000)
+print("H:", H3_hog is not None, "inliers:", int(mask3_hog.sum()) if mask3_hog is not None else 0, "/", len(matchesA3_hog))
+
+vis_matches3_hog = cv2.drawMatches(
+    A3, kpsA3_f_hog,
+    B3, kpsB3_f_hog,
+    matchesA3_hog, None,
+    matchColor=[0, 255, 0],
+    singlePointColor=[255, 0, 0],
+    matchesMask=(mask3_hog.ravel().tolist() if mask3_hog is not None else None),
+    flags=cv2.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS
+)
+
+plt.figure(figsize=(12, 6))
+plt.title("Matches 3 (fixed - HOG descriptors)")
+plt.imshow(vis_matches3_hog)
+plt.axis('off')
+plt.show()
+```
 
   - **Show before–and–after matching visualizations and discuss improvements.**
 
@@ -161,7 +418,27 @@ Test descriptor HOG ada dalam code untuk ketiga pair.
 
 Jawaban dan code semua ada di vision-engine-v2.ipynb
 
-![image 24](assets/report-24.png)
+```text
+Keypoint A1: 500
+Keypoint A2: 500
+Keypoint B1: 500
+Keypoint B2: 500
+Keypoint C1: 500
+Keypoint C2: 500
+
+Matches Patch Descriptors):
+matches A patch: 177
+matches B patch: 91
+matches C patch: 110
+
+Descriptor shapes (Patch):
+D_A1_patch: (500, 121)
+D_A2_patch: (500, 121)
+D_B1_patch: (500, 121)
+D_B2_patch: (500, 121)
+D_C1_patch: (500, 121)
+D_C2_patch: (500, 121)
+```
 
 ![image 25](assets/report-25.png)
 
@@ -182,7 +459,30 @@ Jawaban dan code semua ada di vision-engine-v2.ipynb
     - **Average reprojection error,**
     - **Recognition success (e.g., correctly identifying the same scene).**
 
-![image 31](assets/report-31.png)
+```text
+           Image Pair         Variation Type  Total Keypoints (Img1)  Total Keypoints (Img2)  Initial Matches  RANSAC Inliers  Inlier Ratio (%)  Avg Reprojection Error (px)  Recognition Success
+Pair A (Illumination)        Lighting change                     500                     500              177             128             72.32                     122.9605                  YES
+   Pair B (Viewpoint)     Camera angle shift                     500                     500               91               9              9.89                     833.3955                   NO
+       Pair C (Scale)  Distance/Scale change                     500                     500              110              17             15.45                     267.1783                  YES
+
+Pair A (Illumination):
+  • Number of matched inliers: 128
+  • Average reprojection error: 122.9605 pixels
+  • Inlier ratio: 72.32%
+  • Recognition success: YES - Scene correctly identified
+
+Pair B (Viewpoint):
+  • Number of matched inliers: 9
+  • Average reprojection error: 833.3955 pixels
+  • Inlier ratio: 9.89%
+  • Recognition success: NO - Insufficient inliers
+
+Pair C (Scale):
+  • Number of matched inliers: 17
+  • Average reprojection error: 267.1783 pixels
+  • Inlier ratio: 15.45%
+  • Recognition success: YES - Scene correctly identified
+```
 
   - **Reflect on how your final pipeline demonstrates robustness to real-world variation (lighting, scale, angle).**
       - Robustness terhadap pencahayaan (Pair A)
