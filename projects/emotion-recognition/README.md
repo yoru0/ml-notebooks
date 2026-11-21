@@ -14,7 +14,7 @@ The workflow expects the RAVDESS Audio Speech Actor archive (`Audio_Speech_Actor
 
 ## Getting Started
 ### Prerequisites
-- [uv](https://docs.astral.sh/uv/) (installs Python 3.12 and the dependencies)
+- [uv](https://docs.astral.sh/uv/) (installs Python 3.13 and the dependencies)
 
 ### Installation
 1. Clone the repository.

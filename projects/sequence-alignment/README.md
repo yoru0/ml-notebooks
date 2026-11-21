@@ -7,7 +7,7 @@ Notebook experiments for basic bioinformatics tasks: loading FASTA/GenBank seque
 - `pyproject.toml` / `uv.lock` - Python dependencies, managed with uv.
 
 ## Setup
-1. Install [uv](https://docs.astral.sh/uv/). It provides Python 3.12 automatically.
+1. Install [uv](https://docs.astral.sh/uv/). It provides Python 3.13 automatically.
 2. Install the dependencies:
    ```bash
    uv sync

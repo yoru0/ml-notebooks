@@ -3,7 +3,7 @@
 Collection of Jupyter notebooks that walk through fundamental deep learning workflows using TensorFlow and the Python data-science stack.
 
 ## Getting Started
-1. Install [uv](https://docs.astral.sh/uv/). It provides Python 3.12 automatically.
+1. Install [uv](https://docs.astral.sh/uv/). It provides Python 3.13 automatically.
 2. Install the dependencies (from this folder):
    ```bash
    uv sync

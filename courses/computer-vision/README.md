@@ -4,7 +4,7 @@ Hands-on computer vision mini-projects built with Python and OpenCV. Each folder
 
 ## Getting Started
 
-1. Install [uv](https://docs.astral.sh/uv/). It provides Python 3.12 automatically.
+1. Install [uv](https://docs.astral.sh/uv/). It provides Python 3.13 automatically.
 2. Install the dependencies (from this folder):
    ```bash
    uv sync
