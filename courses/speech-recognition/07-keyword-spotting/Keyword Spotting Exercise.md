@@ -9,7 +9,7 @@ To start the project, the founder gathers some passionate engineers that have th
 3. **Perform two stages** of **preprocessing** on the **dataset**, which involves **squeezing** and **converting the audio array into a spectrogram** format that can be processed by the Convolutional Neural Network model.
 4. Create the following **Convolutional Neural Network** architecture using **TensorFlow** library which the **architecture modeling** is mainly divided into **3 parts**.
 
-    ![](assets/latihan-uap-01.png)
+    ![](assets/exercise-01.png)
 
     *Figure 1. CNN Model Architecture*
 
@@ -66,6 +66,6 @@ To start the project, the founder gathers some passionate engineers that have th
 
 7. Evaluate the **Convolutional Neural Network** model by **train accuracy** and **validation accuracy**.
 
-    ![](assets/latihan-uap-04.png)
+    ![](assets/exercise-04.png)
 
     *Figure 4. Model Evaluation*
