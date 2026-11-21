@@ -1,4 +1,4 @@
-# Jawaban
+# Exam Answers
 
 ## **I. Case (100%)**
 
@@ -42,7 +42,7 @@ model_v1 = tf.keras.Sequential([
 
 - b. **[5 points]** Plot the training and validation losses over epochs, analyze and explain what happens in the training based on the plot.
 
-![](assets/jawaban-04.png)
+![](assets/answer-04.png)
 
 Analisis model v1:
 
@@ -216,7 +216,7 @@ class VAE(tf.keras.Model):
 
 - b. **[5 points]** Plot the training and validation losses over epochs, analyze, and explain what happened in the generative training based on the plot.
 
-![](assets/jawaban-11.png)
+![](assets/answer-11.png)
 
 ### **VAE Loss Analysis**
 
@@ -255,9 +255,9 @@ Generated images shape: (500, 32, 32, 3)
 
 - d. **[5 points]** Compare 10 generated images and 10 original images, analyze and explain the comparison.
 
-![](assets/jawaban-13.png)
+![](assets/answer-13.png)
 
-![](assets/jawaban-14.png)
+![](assets/answer-14.png)
 
 - e. **[10 points]** Construct a new dataset for classification with 2 classes: original and fake. Use your original training dataset as the original class and the generated images from point b as the fake class.
 
@@ -312,7 +312,7 @@ model_v1 = tf.keras.Sequential([
 
 - g. **[5 points]** Plot the training and validation losses over epochs, analyze, and explain what happened in the classification training based on the plot.
 
-![](assets/jawaban-17.png)
+![](assets/answer-17.png)
 
 Plot Accuracy dan Loss Analysis
 

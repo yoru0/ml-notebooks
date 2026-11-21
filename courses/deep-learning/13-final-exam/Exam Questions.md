@@ -1,4 +1,4 @@
-# Soal
+# Exam Questions
 
 ## Learning Outcome
 
