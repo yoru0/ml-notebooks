@@ -24,7 +24,7 @@ Public Kaggle datasets need no API key. The exceptions are Kaggle *competitions*
 | `projects/skin-cancer-classification` | Skin cancer ISIC, 9 classes (2,357 images, ~826 MB) | [Kaggle: nodoubttome/skin-cancer9-classesisic](https://www.kaggle.com/datasets/nodoubttome/skin-cancer9-classesisic) | `kagglehub` | kagglehub cache, re-split copy in `~/.cache/ml-notebooks/skin-cancer` |
 | `courses/computational-biology/04-sequence-alignment`, `05-kmer-classification` | NCBI nucleotide records NC_035298.1 and MK312630.1 | [NCBI Nucleotide](https://www.ncbi.nlm.nih.gov/nuccore/) | `Bio.Entrez.efetch` | not saved |
 | `courses/computational-biology/04-sequence-alignment/fasta-genbank-alignment-exercise.ipynb`, `projects/sequence-alignment` | NCBI records M99367.1 (FASTA) and BI431008 (GenBank) | [NCBI Nucleotide](https://www.ncbi.nlm.nih.gov/nuccore/) | `Bio.Entrez.efetch` | not saved |
-| `courses/machine-learning/05-assignment`, `courses/natural-language-processing/assignment-3`, `projects/odi-nlp-classifier` | Mental Health Corpus (27,977 posts, `text` + `label`) | [Kaggle: reihanenamdari/mental-health-corpus](https://www.kaggle.com/datasets/reihanenamdari/mental-health-corpus) | `kagglehub` | kagglehub cache |
+| `courses/machine-learning/05-assignment`, `courses/natural-language-processing/07-assignment-mental-health`, `projects/odi-nlp-classifier` | Mental Health Corpus (27,977 posts, `text` + `label`) | [Kaggle: reihanenamdari/mental-health-corpus](https://www.kaggle.com/datasets/reihanenamdari/mental-health-corpus) | `kagglehub` | kagglehub cache |
 | `courses/natural-language-processing/06-quiz` | Rotten Tomatoes movies and critic reviews | [Kaggle: andrezaza/clapper-massive-rotten-tomatoes-movies-and-reviews](https://www.kaggle.com/datasets/andrezaza/clapper-massive-rotten-tomatoes-movies-and-reviews) | `kagglehub` | kagglehub cache |
 | `courses/deep-learning/05-recurrent-neural-networks` | Tatoeba English–German sentence pairs (the 64,000 shortest) | [manythings.org/anki](https://www.manythings.org/anki/) (from [Tatoeba](https://tatoeba.org/), CC BY 2.0 FR) | notebook cell (`urllib`) | not saved |
 
@@ -48,7 +48,7 @@ This download has not been run end to end.
 These files used to be committed but no notebook in the repo reads them. Public copies:
 
 - `courses/deep-learning/04-word-embeddings`: [Kaggle: sbhatti/financial-sentiment-analysis](https://www.kaggle.com/datasets/sbhatti/financial-sentiment-analysis) (`data.csv`, 5,842 rows). The old committed file was identical.
-- `courses/natural-language-processing/nlp-quiz`: [Kaggle: crowdflower/twitter-airline-sentiment](https://www.kaggle.com/datasets/crowdflower/twitter-airline-sentiment) (`Tweets.csv`, use the `airline_sentiment` and `text` columns). The old committed file was a subset of it.
+- `courses/natural-language-processing/08-airline-tweet-practice`: [Kaggle: crowdflower/twitter-airline-sentiment](https://www.kaggle.com/datasets/crowdflower/twitter-airline-sentiment) (`Tweets.csv`, use the `airline_sentiment` and `text` columns). The old committed file was a subset of it.
 
 ```python
 import kagglehub

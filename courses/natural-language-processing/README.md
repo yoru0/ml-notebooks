@@ -12,10 +12,10 @@ Notebooks that cover the standard NLP pipeline in Python: tokenization, stemming
 | `04-tf-idf-and-cosine-similarity` | `tf-idf-and-cosine-similarity.ipynb` | TF-IDF vectors and cosine similarity |
 | `05-naive-bayes` | `imdb-naive-bayes.ipynb` | Naive Bayes sentiment classifier on IMDB reviews |
 | `06-quiz` | `quiz-answer-1` to `quiz-answer-4`, `movie-review-practice.ipynb` | Quiz answers: movie sentiment, TF-IDF recommendation, preprocessing, Word2Vec |
-| `assignment-3` | `mental-health-model-comparison.ipynb`, `single-model/` | Comparison of text classifiers on the mental health corpus |
-| `nlp-quiz` | `Airline Tweet Sentiment Practice.md` | Practice task description (airline tweet sentiment) |
+| `07-assignment-mental-health` | `mental-health-model-comparison.ipynb`, `single-model/` | Comparison of text classifiers on the mental health corpus |
+| `08-airline-tweet-practice` | `Airline Tweet Sentiment Practice.md` | Practice task description (airline tweet sentiment) |
 
-The task descriptions are in Markdown next to the notebooks: `06-quiz/Quiz Description.md`, `06-quiz/Quiz Description 2.md` and `nlp-quiz/Airline Tweet Sentiment Practice.md`. The assignment write-ups are in `assignment-3/`.
+The task descriptions are in Markdown next to the notebooks: `06-quiz/Quiz Description.md`, `06-quiz/Quiz Description 2.md` and `08-airline-tweet-practice/Airline Tweet Sentiment Practice.md`. The assignment write-ups are in `07-assignment-mental-health/`.
 
 ## Getting Started
 
@@ -35,4 +35,4 @@ Nothing is stored in the repo. The notebooks download what they need on first ru
 
 - NLTK corpora (`punkt`, `stopwords`, `wordnet`, the POS tagger) are fetched with `nltk.download(...)` inside the notebooks.
 - The `06-quiz` notebooks build their movie data from the Kaggle Rotten Tomatoes dataset, which is the closest public match to the original quiz files. Saved outputs in those notebooks come from the earlier data, so numbers will differ when you re-run them. `quiz-answer-3-preprocessing.ipynb` already fails on a fresh run because a cell calls `predict_review` before a model exists.
-- `05-naive-bayes/model.pickle` and `06-quiz/model.pickle` are models saved by the notebooks.
+- The notebooks save trained models (`model.pickle`, `*.joblib`) next to themselves. Git ignores these files, so they are recreated when you run the notebooks.
