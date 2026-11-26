@@ -15,7 +15,8 @@ Notebook demonstrating speech-to-text inference with Wav2Vec2 and text-to-speech
 
 ## Usage
 ### Speech to Text
-- Place the audio file you want to transcribe at `test.wav`, sampled at 16 kHz (or update the path in the notebook).
+- By default the notebook transcribes `../05-wav2vec/speech.wav`. To transcribe your own file, change `audio_path` in the notebook (it is resampled to 16 kHz).
+- The generated `english.mp3` is written to `~/.cache/ml-notebooks/speech-recognition/text-to-speech/`, not to the repo.
 - Run the "Speech To Text" section to load the Wav2Vec2 model, tokenize the waveform, and decode the predicted transcript.
 
 ### Text to Speech
