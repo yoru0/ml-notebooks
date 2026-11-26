@@ -33,5 +33,4 @@
 ## Housekeeping
 
 - [ ] Empty untracked `assets/` folders (for example `courses/natural-language-processing/06-quiz/assets`).
-- [ ] Delete the leftover clone `../ml-notebooks-rewrite` and, once happy with the rewritten history, the backup `../ml-notebooks-backup.git`.
 - [ ] On machines where Python rejects site certificates (`CERTIFICATE_VERIFY_FAILED`), set `SSL_CERT_FILE` to the environment's certifi bundle before running notebooks that download over HTTPS.
