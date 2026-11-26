@@ -13,5 +13,5 @@ Computer vision mini-project for a final exam. It explores a full local-feature 
 - Update the image path constants at the top of each notebook if your filenames differ. Execution prints OpenCV/NumPy versions and visualizes each stage inline.
 
 ## Notes
-- Outputs in `Output/` are sample results from the corrected pipeline; they are not used programmatically.  
+- Outputs in `output/` are sample results from the corrected pipeline; they are not used programmatically.  
 - All code is CPU-only; no GPU dependencies are required.

@@ -14,4 +14,6 @@ cv2.destroyAllWindows()
 height, width, _ = image.shape
 image[:, width // 2 :] = (0, 255, 255)
 
-cv2.imwrite("modified_odi.jpg", image)
+OUT_DIR = Path.home() / ".cache" / "ml-notebooks" / "computer-vision"
+OUT_DIR.mkdir(parents=True, exist_ok=True)
+cv2.imwrite(str(OUT_DIR / "modified_odi.jpg"), image)

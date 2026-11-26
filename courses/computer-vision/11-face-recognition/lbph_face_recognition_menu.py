@@ -2,6 +2,10 @@ import os
 import cv2
 import numpy as np
 import math
+from pathlib import Path
+
+# The trained model is generated, so it lives in the cache folder, not in the repo.
+MODEL_PATH = Path.home() / ".cache" / "ml-notebooks" / "computer-vision" / "11-face-recognition" / "lbph_model.xml"
 
 face_cascade = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
 face_recognizer = cv2.face.LBPHFaceRecognizer_create()
@@ -70,15 +74,16 @@ def train_test_model():
     accuracy = correct / total * 100
     print(f"Prediction accuracy: {accuracy:.2f}%")
 
-    face_recognizer.write("lbph_model.xml")
+    MODEL_PATH.parent.mkdir(parents=True, exist_ok=True)
+    face_recognizer.write(str(MODEL_PATH))
 
 
 def predict_picture():
-    if not os.path.exists("lbph_model.xml"):
+    if not MODEL_PATH.exists():
         print("Model doesn't exist.")
         return
 
-    face_recognizer.read("lbph_model.xml")
+    face_recognizer.read(str(MODEL_PATH))
     path_input = input("Enter image path: ")
 
     if not os.path.exists(path_input):
