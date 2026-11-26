@@ -18,6 +18,10 @@ build/
 *.pt
 *.pth
 *.onnx
+*.joblib
+*.pickle
+*.pkl
+lbph_model.xml
 *.safetensors
 runs/
 mlruns/
