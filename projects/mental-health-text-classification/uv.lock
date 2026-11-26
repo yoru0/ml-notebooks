@@ -660,7 +660,7 @@ wheels = [
 ]
 
 [[package]]
-name = "odi-nlp-classifier"
+name = "mental-health-text-classification"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [

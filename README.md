@@ -63,13 +63,13 @@ ml-notebooks/
 
 ## Projects
 
-| Project                                                           | What it does                                                  |
-| ----------------------------------------------------------------- | ------------------------------------------------------------- |
-| [bitcoin-direction-rnn-lstm](projects/bitcoin-direction-rnn-lstm) | SimpleRNN vs LSTM for Bitcoin price direction                 |
-| [dog-breed-classification](projects/dog-breed-classification)     | Dog breed identification with PyTorch (Kaggle competition)    |
-| [emotion-recognition](projects/emotion-recognition)               | Emotion classification from speech (RAVDESS)                  |
-| [gesture-recognition](projects/gesture-recognition)               | Webcam hand gesture recognizer with MediaPipe                 |
-| [odi-nlp-classifier](projects/odi-nlp-classifier)                 | Mental health text classifier                                 |
-| [sequence-alignment](projects/sequence-alignment)                 | Pairwise alignment of nucleotide sequences                    |
-| [skin-cancer-classification](projects/skin-cancer-classification) | Skin lesion classification with an EfficientNet + Swin hybrid |
-| [stock-forecasting](projects/stock-forecasting)                   | LSTM price forecasting for stocks and crypto                  |
+| Project                                                                         | What it does                                                  |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------- |
+| [bitcoin-direction-rnn-lstm](projects/bitcoin-direction-rnn-lstm)               | SimpleRNN vs LSTM for Bitcoin price direction                 |
+| [dog-breed-classification](projects/dog-breed-classification)                   | Dog breed identification with PyTorch (Kaggle competition)    |
+| [emotion-recognition](projects/emotion-recognition)                             | Emotion classification from speech (RAVDESS)                  |
+| [gesture-recognition](projects/gesture-recognition)                             | Webcam hand gesture recognizer with MediaPipe                 |
+| [mental-health-text-classification](projects/mental-health-text-classification) | Mental health text classifier                                 |
+| [sequence-alignment](projects/sequence-alignment)                               | Pairwise alignment of nucleotide sequences                    |
+| [skin-cancer-classification](projects/skin-cancer-classification)               | Skin lesion classification with an EfficientNet + Swin hybrid |
+| [stock-forecasting](projects/stock-forecasting)                                 | LSTM price forecasting for stocks and crypto                  |

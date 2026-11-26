@@ -5,13 +5,13 @@ It compares several machine learning models, from a voting classifier to an LSTM
 ## Files & Folders
 - `model-selection.ipynb` -> the models tested, from voting classifier to LSTM
 - The training data (Mental Health Corpus from Kaggle) is downloaded by the notebook on first run
-- `voting_model.joblib`, `tfidf_vectorizer.joblib`, `model.joblib` -> the saved models
+- The saved models (`voting_model.joblib`, `voting_model.pickle`, `tfidf_vectorizer.joblib`) are written to `~/.cache/ml-notebooks/mental-health-text-classification/`, not to the repo
 
 ## How to use
 ### Clone repo
 ```
 git clone https://github.com/yoru0/ml-notebooks.git
-cd ml-notebooks/projects/odi-nlp-classifier
+cd ml-notebooks/projects/mental-health-text-classification
 ```
 
 ### Install and run
