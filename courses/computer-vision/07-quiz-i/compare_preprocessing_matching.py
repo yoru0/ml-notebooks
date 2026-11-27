@@ -1,11 +1,52 @@
 import os
+import shutil
 import cv2
 import numpy as np
+import kagglehub
+from pathlib import Path
 from matplotlib import pyplot as plt
 
+# The images are downloaded, so they live in the cache folder, not in the repo.
+CACHE_DIR = Path.home() / ".cache" / "ml-notebooks" / "computer-vision" / "07-quiz-i"
+DATA_PATH = CACHE_DIR / "data"
 
-target_path = "../06-image-matching/dataset/Object.png"
-data_folder = "../06-image-matching/dataset/data/"
+# Pokemon Images Dataset (Kaggle: kvpratama/pokemon-images-dataset). Same
+# images and targets as 06-image-matching.
+CANDIDATE_IDS = [4, 7, 25, 92, 252, 258, 393, 495]
+TARGETS = {
+    "Object.png": (252, 20, 1.8),
+    "Object2.png": (7, -15, 1.5),
+    "Object3.png": (92, 35, 2.0),
+}
+
+
+def make_target(image, angle, scale):
+    h, w = image.shape[:2]
+    rotation = cv2.getRotationMatrix2D((w / 2, h / 2), angle, 1.0)
+    rotated = cv2.warpAffine(image, rotation, (w, h), borderValue=(255, 255, 255))
+    return cv2.resize(rotated, None, fx=scale, fy=scale, interpolation=cv2.INTER_CUBIC)
+
+
+def prepare_dataset():
+    if DATA_PATH.exists():
+        return
+
+    source = Path(kagglehub.dataset_download("kvpratama/pokemon-images-dataset"))
+    source = source / "pokemon_jpg" / "pokemon_jpg"
+
+    DATA_PATH.mkdir(parents=True, exist_ok=True)
+    for pokemon_id in CANDIDATE_IDS:
+        shutil.copy(source / f"{pokemon_id}.jpg", DATA_PATH / f"{pokemon_id}.jpg")
+
+    for name, (pokemon_id, angle, scale) in TARGETS.items():
+        image = cv2.imread(str(source / f"{pokemon_id}.jpg"))
+        cv2.imwrite(str(CACHE_DIR / name), make_target(image, angle, scale))
+
+
+prepare_dataset()
+
+target_path = str(CACHE_DIR / "Object.png")
+data_folder = str(DATA_PATH)
 
 
 # Median Blur
@@ -76,8 +117,8 @@ def find_best_match(preprocess_func, title):
 
 
 find_best_match(preprocess_v1, "Version 1 (Median Blur)")
-target_path = "../06-image-matching/dataset/Object2.png"
+target_path = str(CACHE_DIR / "Object2.png")
 find_best_match(preprocess_v2, "Version 2 (Gaussian Blur)")
 
-target_path = "../06-image-matching/dataset/Object3.png"
+target_path = str(CACHE_DIR / "Object3.png")
 find_best_match(preprocess_v2, "Version 2 (Gaussian Blur)")

@@ -1,23 +1,63 @@
 import cv2
-import os
+import shutil
 import numpy as np
 import matplotlib.pyplot as plt
+import kagglehub
+from pathlib import Path
+
+# The images are downloaded, so they live in the cache folder, not in the repo.
+CACHE_DIR = Path.home() / ".cache" / "ml-notebooks" / "computer-vision" / "06-image-matching"
+DATA_PATH = CACHE_DIR / "data"
+
+# Pokemon Images Dataset (Kaggle: kvpratama/pokemon-images-dataset). Files are
+# named by Pokedex number. These 8 are the candidate images.
+CANDIDATE_IDS = [4, 7, 25, 92, 252, 258, 393, 495]
+
+# Target objects: a candidate rotated and enlarged, so it is not an identical
+# copy. File name -> (Pokedex number, rotation in degrees, scale).
+TARGETS = {
+    "Object.png": (252, 20, 1.8),
+    "Object2.png": (7, -15, 1.5),
+    "Object3.png": (92, 35, 2.0),
+}
 
 
-PATH = "dataset/"
-object = cv2.imread(PATH + "Object.png")
-# object = cv2.imread(PATH + 'Object2.png')
+def make_target(image, angle, scale):
+    h, w = image.shape[:2]
+    rotation = cv2.getRotationMatrix2D((w / 2, h / 2), angle, 1.0)
+    rotated = cv2.warpAffine(image, rotation, (w, h), borderValue=(255, 255, 255))
+    return cv2.resize(rotated, None, fx=scale, fy=scale, interpolation=cv2.INTER_CUBIC)
+
+
+def prepare_dataset():
+    if DATA_PATH.exists():
+        return
+
+    source = Path(kagglehub.dataset_download("kvpratama/pokemon-images-dataset"))
+    source = source / "pokemon_jpg" / "pokemon_jpg"
+
+    DATA_PATH.mkdir(parents=True, exist_ok=True)
+    for pokemon_id in CANDIDATE_IDS:
+        shutil.copy(source / f"{pokemon_id}.jpg", DATA_PATH / f"{pokemon_id}.jpg")
+
+    for name, (pokemon_id, angle, scale) in TARGETS.items():
+        image = cv2.imread(str(source / f"{pokemon_id}.jpg"))
+        cv2.imwrite(str(CACHE_DIR / name), make_target(image, angle, scale))
+
+
+prepare_dataset()
+
+object = cv2.imread(str(CACHE_DIR / "Object.png"))
+# object = cv2.imread(str(CACHE_DIR / "Object2.png"))
 
 # Preprocessing
 ## Color to RGB
-object = cv2.cvtColor(object, cv2.COLOR_BGRA2RGB)
+object = cv2.cvtColor(object, cv2.COLOR_BGR2RGB)
 
 # Akses dataset
-DATA_PATH = PATH + "data/"
 data = []
-for image_path in os.listdir(DATA_PATH):
-    image_path = DATA_PATH + image_path
-    image_data = cv2.imread(image_path)
+for image_path in sorted(DATA_PATH.iterdir()):
+    image_data = cv2.imread(str(image_path))
     data.append(image_data)
 
 # Preprocessing

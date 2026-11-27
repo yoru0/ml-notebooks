@@ -1,17 +1,51 @@
 import os
+import shutil
 import cv2
 import numpy as np
 import math
+import kagglehub
 from pathlib import Path
 
-# The trained model is generated, so it lives in the cache folder, not in the repo.
-MODEL_PATH = Path.home() / ".cache" / "ml-notebooks" / "computer-vision" / "12-quiz-ii" / "lbph_model.xml"
+# The dataset and the trained model are generated, so they live in the cache
+# folder, not in the repo.
+CACHE_DIR = Path.home() / ".cache" / "ml-notebooks" / "computer-vision" / "12-quiz-ii"
+MODEL_PATH = CACHE_DIR / "lbph_model.xml"
+
+# Labeled Faces in the Wild (Kaggle: jessicali9530/lfw-dataset). Same split as
+# 11-face-recognition: the first 10 images of each person are used for
+# training and the next 3 for testing.
+PEOPLE = ["George_W_Bush", "Colin_Powell", "Tony_Blair", "Donald_Rumsfeld"]
+N_TRAIN = 10
+N_TEST = 3
+
+
+def prepare_dataset():
+    train_path = CACHE_DIR / "dataset" / "train"
+    test_path = CACHE_DIR / "dataset" / "test"
+    if train_path.exists() and test_path.exists():
+        return train_path, test_path
+
+    lfw_path = Path(kagglehub.dataset_download("jessicali9530/lfw-dataset"))
+    lfw_path = lfw_path / "lfw-deepfunneled" / "lfw-deepfunneled"
+
+    for person in PEOPLE:
+        images = sorted((lfw_path / person).glob("*.jpg"))
+        splits = {
+            train_path: images[:N_TRAIN],
+            test_path: images[N_TRAIN : N_TRAIN + N_TEST],
+        }
+        for split_path, split_images in splits.items():
+            (split_path / person).mkdir(parents=True, exist_ok=True)
+            for image in split_images:
+                shutil.copy(image, split_path / person / image.name)
+
+    return train_path, test_path
+
 
 face_cascade = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
 face_recognizer = cv2.face.LBPHFaceRecognizer_create()
 
-train_dir = "../11-face-recognition/dataset/train/"
-test_dir = "../11-face-recognition/dataset/test/"
+train_dir, test_dir = prepare_dataset()
 
 # simpan label
 classes = os.listdir(train_dir)

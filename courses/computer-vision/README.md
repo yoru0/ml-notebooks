@@ -29,7 +29,7 @@ Hands-on computer vision mini-projects built with Python and OpenCV. Each folder
 | `09-image-retrieval` | `color_histogram_retrieval.py` | Image retrieval by colour histogram (needs an image library that is not in the repo) |
 | `10-object-detection` | `lbph_face_recognition.py` | Haar cascade face detection with LBPH recognition |
 | `11-face-recognition` | `lbph_face_recognition_menu.py`, `QuizPrep.md` | Menu-driven LBPH face recognition |
-| `12-quiz-ii` | `lbph_face_recognition_menu.py` | Quiz II: the face recognition menu, using the dataset from `11-face-recognition` |
+| `12-quiz-ii` | `lbph_face_recognition_menu.py` | Quiz II: the face recognition menu, with its own copy of the face dataset |
 | `13-final-exam` | `submission/vision-engine-v1.ipynb`, `submission/vision-engine-v2.ipynb` | Local-feature pipeline, baseline and corrected versions |
 
 The course has no session 08. `dataset/odi.jpg` is the sample image used by sessions 01 to 05.
@@ -37,5 +37,6 @@ The course has no session 08. `dataset/odi.jpg` is the sample image used by sess
 ## Notes
 
 - Scripts that call `cv2.imshow` (01, 02, 10, 11, 12) or `plt.show` open a window, so they need a display. The menu scripts in `11-face-recognition` and `12-quiz-ii` also wait for keyboard input.
-- Generated files go to `~/.cache/ml-notebooks/computer-vision/`, not the repo: the trained `lbph_model.xml` of each menu script, and `modified_odi.jpg` from `01-introduction`.
+- Sessions 06, 10, 11 and 12 download their images on the first run (Pokémon images and Labeled Faces in the Wild, through `kagglehub`). See `Datasets.md` in the repo root.
+- Generated files go to `~/.cache/ml-notebooks/computer-vision/`, not the repo: the downloaded image subsets, the trained `lbph_model.xml` of each menu script, and `modified_odi.jpg` from `01-introduction`.
 - The `haarcascade_frontalface_default.xml` files are OpenCV's public pretrained face detector, kept next to the scripts that load it.
